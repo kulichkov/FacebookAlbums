@@ -35,6 +35,7 @@ class LoginViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        _ = ImagesRepo.shared
         user = User.loadFromFile()
         loginButton.readPermissions = FacebookConstants.loginPermissions
         NotificationCenter.default.addObserver(

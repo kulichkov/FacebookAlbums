@@ -17,7 +17,6 @@ class FacebookAPI {
         return formatter
     }
 
-
     func fetchAlbums(pageCursor: String?, complete: @escaping (_ albums: [FBAlbum], _ nextPage: String?) -> ()) {
         var parameters = ["fields": "name,id,cover_photo"]
         if pageCursor != nil {
@@ -183,34 +182,30 @@ class FacebookAPI {
 //        }
 //    }
 //
-//    func getSmallImage(imageID: String, complete: @escaping (_ cover: UIImage) -> ()) {
-//        FBSDKGraphRequest(graphPath: "/\(imageID)", parameters: ["fields": "picture"]).start { (fbConnection, result, error) in
-//            print(error?.localizedDescription ?? "No errors")
-//            if result != nil {
-//                print("Picture was read!")
-//                if let parsedResult = result as? [String: String] {
-//                    if let pictureURLString = parsedResult["picture"] {
-//                        let pictureURL = URL(string: pictureURLString)!
-//                        DispatchQueue.main.async {
-//                        let urlSession = URLSession(configuration: .default)
-//                        urlSession.dataTask(with: pictureURL, completionHandler: { (imageData, response, error) in
-//                            if imageData != nil {
-//                                let image = UIImage(data: imageData!)
-//                                DispatchQueue.main.sync {
-//                                    complete(image!)
-//                                }
-//                            }
-//                        }).resume()
-//                        }
-//                    }
-//                }
-//                if error != nil {
-//                    print(error!.localizedDescription)
-//                }
-//            }
-//
-//        }
-//    }
 
+    func getImage(imageID: String, height: String, complete: @escaping (_ image: UIImage) -> ()) {
+        FBSDKGraphRequest(graphPath: "/\(imageID)", parameters: ["fields": "images"]).start { (_, result, _) in
+            if let parsedResult = result as? [String: Any] {
+                if let images = parsedResult["images"] as? [[String: String]] {
+                    for eachImage in images {
+                        if eachImage["height"] == height {
+                            if let imageURL = eachImage["source"] {
+                                let pictureURL = URL(string: imageURL)!
+                                let urlSession = URLSession(configuration: .default)
+                                urlSession.dataTask(with: pictureURL, completionHandler: { (imageData, _, _) in
+                                    if imageData != nil {
+                                        let image = UIImage(data: imageData!)
+                                        DispatchQueue.main.sync {
+                                            complete(image!)
+                                        }
+                                    }
+                                }).resume()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
