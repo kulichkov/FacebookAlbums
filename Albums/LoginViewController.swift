@@ -80,8 +80,12 @@ class LoginViewController: UIViewController {
         if let identifier = segue.identifier {
             switch identifier {
             case Constants.segueShowAlbums:
-                if let albumsTVC = segue.destination as? AlbumsTableViewController {
-                    albumsTVC.user = user
+                var destination = segue.destination
+                if let navController = destination as? UINavigationController {
+                    destination = navController.visibleViewController!
+                }
+                if let AlbumsTVC = destination as? AlbumsTableViewController {
+                    AlbumsTVC.user = user
                 }
             default:
                 break

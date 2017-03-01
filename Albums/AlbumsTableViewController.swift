@@ -32,6 +32,7 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
             } else {
                 self.user.albums.append(contentsOf: fetchedAlbums)
             }
+            self.user.saveToFile()
             self.nextPage = nextPage
         }
     }
@@ -40,7 +41,7 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-
+        fetchAlbums(page: nextPage)
         // Do any additional setup after loading the view.
     }
 
