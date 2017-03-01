@@ -14,6 +14,7 @@
 		69EA8EF51E670F5F006560FC /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69EA8EF21E670F5F006560FC /* Bolts.framework */; };
 		69EA8EF61E670F5F006560FC /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69EA8EF31E670F5F006560FC /* FBSDKCoreKit.framework */; };
 		69EA8EF71E670F5F006560FC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69EA8EF41E670F5F006560FC /* FBSDKLoginKit.framework */; };
+		69EA8EF91E671255006560FC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA8EF81E671255006560FC /* LoginViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		69EA8EF21E670F5F006560FC /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		69EA8EF31E670F5F006560FC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		69EA8EF41E670F5F006560FC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		69EA8EF81E671255006560FC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				69EA8ED71E670D4F006560FC /* AppDelegate.swift */,
+				69EA8EF81E671255006560FC /* LoginViewController.swift */,
 				69EA8EDB1E670D4F006560FC /* Main.storyboard */,
 				69EA8EDE1E670D4F006560FC /* Assets.xcassets */,
 				69EA8EE01E670D4F006560FC /* LaunchScreen.storyboard */,
@@ -155,6 +158,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69EA8EF91E671255006560FC /* LoginViewController.swift in Sources */,
 				69EA8ED81E670D4F006560FC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
