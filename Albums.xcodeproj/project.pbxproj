@@ -15,6 +15,7 @@
 		69EA8EF61E670F5F006560FC /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69EA8EF31E670F5F006560FC /* FBSDKCoreKit.framework */; };
 		69EA8EF71E670F5F006560FC /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69EA8EF41E670F5F006560FC /* FBSDKLoginKit.framework */; };
 		69EA8EF91E671255006560FC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA8EF81E671255006560FC /* LoginViewController.swift */; };
+		69EA8EFB1E6712B6006560FC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA8EFA1E6712B6006560FC /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		69EA8EF31E670F5F006560FC /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		69EA8EF41E670F5F006560FC /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		69EA8EF81E671255006560FC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		69EA8EFA1E6712B6006560FC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +66,7 @@
 		69EA8ED61E670D4F006560FC /* Albums */ = {
 			isa = PBXGroup;
 			children = (
+				69EA8EFC1E6712CA006560FC /* Model */,
 				69EA8ED71E670D4F006560FC /* AppDelegate.swift */,
 				69EA8EF81E671255006560FC /* LoginViewController.swift */,
 				69EA8EDB1E670D4F006560FC /* Main.storyboard */,
@@ -83,6 +86,14 @@
 			);
 			name = Frameworks;
 			path = Albums;
+			sourceTree = "<group>";
+		};
+		69EA8EFC1E6712CA006560FC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				69EA8EFA1E6712B6006560FC /* Constants.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,6 +171,7 @@
 			files = (
 				69EA8EF91E671255006560FC /* LoginViewController.swift in Sources */,
 				69EA8ED81E670D4F006560FC /* AppDelegate.swift in Sources */,
+				69EA8EFB1E6712B6006560FC /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

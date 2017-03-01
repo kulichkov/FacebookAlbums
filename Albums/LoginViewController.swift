@@ -24,15 +24,14 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loginButton.readPermissions = ["public_profile", "email", "user_friends", "user_photos"]
+        loginButton.readPermissions = Constants.loginPermissions
         if let profile = FBSDKProfile.current(),
             let firstName = profile.firstName,
             let lastName = profile.lastName {
             self.userNameLabel.text = "\(firstName) \(lastName)"
         } else {
-            self.userNameLabel.text = "Unknown"
+            self.userNameLabel.text = Constants.stringUnknown
         }
-
         profilePicture.setNeedsImageUpdate()
         NotificationCenter.default.addObserver(
             forName: NSNotification.Name.FBSDKProfileDidChange, object: nil, queue: nil) { (Notification) in
@@ -41,7 +40,7 @@ class LoginViewController: UIViewController {
                     let lastName = profile.lastName {
                     self.userNameLabel.text = "\(firstName) \(lastName)"
                 } else {
-                    self.userNameLabel.text = "Unknown"
+                    self.userNameLabel.text = Constants.stringUnknown
                 }
                 if FBSDKAccessToken.current() != nil {
                     self.continueButton.isHidden = false
@@ -49,9 +48,7 @@ class LoginViewController: UIViewController {
                     self.continueButton.isHidden = true
                 }
         }
-
         FBSDKProfile.enableUpdates(onAccessTokenChange: true)
-
         if FBSDKAccessToken.current() != nil {
             continueButton.isHidden = false
         } else {
@@ -62,45 +59,12 @@ class LoginViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if loggedIn { performSegue(withIdentifier: "Show MainVC", sender: nil) }
+        if loggedIn { performSegue(withIdentifier: Constants.segueShowAlbums, sender: nil) }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-/*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let identifier = segue.identifier {
-            switch identifier {
-            case "Show MainVC":
-                if let destination = segue.destination as? AlbumsViewController {
-
-                }
-            default:
-                break
-            }
-        }
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-*/
-
-//    func loginButton(_ loginButton: FBSDKLoginButton!,
-//                     didCompleteWith result: FBSDKLoginManagerLoginResult!,
-//                     error: Error!) {
-//        if let result = result {
-//            print("Logged in")
-//            // Notify our web API that this user has logged in with Facebook
-//        }
-//    }
-
-    func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
-        print("Logging out")
     }
 }
 
