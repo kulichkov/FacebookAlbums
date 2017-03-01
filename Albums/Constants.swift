@@ -11,5 +11,7 @@ import Foundation
 enum Constants {
     static let loginPermissions = ["public_profile", "email", "user_friends", "user_photos"]
     static let stringUnknown = "Unknown"
+    static let stringBlank = ""
     static let segueShowAlbums = "Show Albums"
+    static let imageNoAvatar = "noavatar"
 }

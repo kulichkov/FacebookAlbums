@@ -29,14 +29,6 @@
                                     <constraint firstAttribute="height" constant="60" id="C2t-V0-NDI"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HJi-SO-hYk" customClass="FBSDKProfilePictureView">
-                                <rect key="frame" x="110" y="190" width="100" height="100"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="0aG-cO-qSt"/>
-                                    <constraint firstAttribute="height" constant="100" id="jfV-Sf-ZqD"/>
-                                </constraints>
-                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Facebook Name here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="7id-tT-4pn">
                                 <rect key="frame" x="26" y="310" width="268" height="44"/>
                                 <constraints>
@@ -54,31 +46,38 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Continue"/>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kmk-3q-ntE">
+                                <rect key="frame" x="110" y="190" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="dFl-ya-8a5"/>
+                                    <constraint firstAttribute="width" constant="100" id="nM1-zv-2e0"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="7id-tT-4pn" firstAttribute="leading" secondItem="kmc-cm-vHY" secondAttribute="leadingMargin" constant="10" id="5Cm-Xi-Nfp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="7id-tT-4pn" secondAttribute="trailing" constant="10" id="5pU-lZ-L8S"/>
                             <constraint firstItem="blP-m0-8Hc" firstAttribute="leading" secondItem="kmc-cm-vHY" secondAttribute="leadingMargin" constant="20" id="65O-zc-UOd"/>
+                            <constraint firstItem="Kmk-3q-ntE" firstAttribute="centerY" secondItem="kmc-cm-vHY" secondAttribute="centerY" id="846-9M-pbh"/>
                             <constraint firstItem="fMe-Cq-A3s" firstAttribute="centerX" secondItem="kmc-cm-vHY" secondAttribute="centerX" id="84s-mF-OCA"/>
-                            <constraint firstItem="HJi-SO-hYk" firstAttribute="centerY" secondItem="kmc-cm-vHY" secondAttribute="centerY" id="CEP-uf-dAM"/>
-                            <constraint firstItem="HJi-SO-hYk" firstAttribute="top" secondItem="blP-m0-8Hc" secondAttribute="bottom" constant="20" id="SbX-yG-hsV"/>
-                            <constraint firstItem="7id-tT-4pn" firstAttribute="top" secondItem="HJi-SO-hYk" secondAttribute="bottom" constant="20" id="XS6-CU-9nT"/>
-                            <constraint firstItem="HJi-SO-hYk" firstAttribute="centerX" secondItem="kmc-cm-vHY" secondAttribute="centerX" id="Xll-NR-2w9"/>
+                            <constraint firstItem="Kmk-3q-ntE" firstAttribute="top" secondItem="blP-m0-8Hc" secondAttribute="bottom" constant="20" id="KxD-Tm-F0R"/>
                             <constraint firstAttribute="trailingMargin" secondItem="blP-m0-8Hc" secondAttribute="trailing" constant="20" id="bGO-YR-dBe"/>
+                            <constraint firstItem="Kmk-3q-ntE" firstAttribute="centerX" secondItem="kmc-cm-vHY" secondAttribute="centerX" id="cLY-eE-MY2"/>
+                            <constraint firstItem="7id-tT-4pn" firstAttribute="top" secondItem="Kmk-3q-ntE" secondAttribute="bottom" constant="20" id="lAL-9V-MDg"/>
                             <constraint firstItem="4z1-mx-8aT" firstAttribute="top" secondItem="fMe-Cq-A3s" secondAttribute="bottom" constant="20" id="nMJ-uL-BAA"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="continueButton" destination="fMe-Cq-A3s" id="HXq-Nz-0SS"/>
                         <outlet property="loginButton" destination="blP-m0-8Hc" id="el1-tS-R3D"/>
-                        <outlet property="profilePicture" destination="HJi-SO-hYk" id="Qwe-BI-scK"/>
+                        <outlet property="profilePicture" destination="Kmk-3q-ntE" id="HXl-cq-Vez"/>
                         <outlet property="userNameLabel" destination="7id-tT-4pn" id="co1-KH-wXG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GbH-kJ-t2o" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="92" y="168"/>
+            <point key="canvasLocation" x="135.19999999999999" y="138.0809595202399"/>
         </scene>
     </scenes>
 </document>
