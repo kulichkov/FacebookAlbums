@@ -29,7 +29,7 @@
                                     <constraint firstAttribute="height" constant="60" id="C2t-V0-NDI"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User Facebook Name here" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="7id-tT-4pn">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="7id-tT-4pn">
                                 <rect key="frame" x="26" y="310" width="268" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="tM5-pF-EVW"/>

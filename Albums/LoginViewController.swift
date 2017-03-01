@@ -15,69 +15,54 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var loginButton: FBSDKLoginButton!
     @IBOutlet weak var profilePicture: UIImageView!
     @IBOutlet weak var continueButton: UIButton!
-    var loggedIn: Bool {
+    private var loggedIn: Bool {
         if FBSDKAccessToken.current() != nil {
             return true
         }
         return false
     }
+    private var user: User?
 
     private func saveProfile() {
         let firstName = FBSDKProfile.current().firstName ?? Constants.stringBlank
         let lastName = FBSDKProfile.current().lastName ?? Constants.stringBlank
         let id = FBSDKProfile.current().userID ?? Constants.stringBlank
-        var picture: UIImage!
-        if let pictureData = try? Data(contentsOf: FBSDKProfile.current().imageURL(for: .square, size: CGSize(width: 100, height: 100))) {
-            picture = UIImage(data: pictureData)
-        } else {
-            picture = UIImage(named: Constants.imageNoAvatar)
-        }
-        let fbUser = User(firstName: firstName, secondName: lastName, id: id, picture: picture)
+        let picture = profilePicture.image!
+        let fbUser = User(firstName: firstName, lastName: lastName, id: id, picture: picture)
         fbUser.saveToFile()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let user = User.loadFromFile() {
-            
-        }
+        user = User.loadFromFile()
         loginButton.readPermissions = Constants.loginPermissions
-        if let profile = FBSDKProfile.current(),
-            let firstName = profile.firstName,
-            let lastName = profile.lastName {
-            self.userNameLabel.text = "\(firstName) \(lastName)"
-            if let pictureData = try? Data(contentsOf: profile.imageURL(for: .square, size: CGSize(width: 100, height: 100))) {
-                profilePicture.image = UIImage(data: pictureData)
-            }
-        } else {
-
-            self.userNameLabel.text = Constants.stringBlank
-            profilePicture.image = UIImage(named: Constants.imageNoAvatar)
-        }
-
         NotificationCenter.default.addObserver(
             forName: NSNotification.Name.FBSDKProfileDidChange, object: nil, queue: nil) { (Notification) in
-                if let profile = FBSDKProfile.current(),
-                    let firstName = profile.firstName,
-                    let lastName = profile.lastName {
+                if let profile = FBSDKProfile.current(), let firstName = profile.firstName, let lastName = profile.lastName {
                     self.userNameLabel.text = "\(firstName) \(lastName)"
-                    
+                    if let pictureData = try? Data(contentsOf: profile.imageURL(for: .square, size: CGSize(width: 100, height: 100))) {
+                        self.profilePicture.image = UIImage(data: pictureData)
+                    } else {
+                        self.profilePicture.image = UIImage(named: Constants.imageNoAvatar)
+                    }
+                    self.continueButton.isHidden = false
+                    self.saveProfile()
                 } else {
                     self.userNameLabel.text = Constants.stringBlank
-                }
-                if FBSDKAccessToken.current() != nil {
-                    self.continueButton.isHidden = false
-                } else {
+                    self.profilePicture.image = UIImage(named: Constants.imageNoAvatar)
                     self.continueButton.isHidden = true
+                    User.deleteFile()
                 }
         }
         FBSDKProfile.enableUpdates(onAccessTokenChange: true)
+
         if FBSDKAccessToken.current() != nil {
+            userNameLabel.text = ("\(user!.firstName) \(user!.lastName)")
+            profilePicture.image = user!.picture
             continueButton.isHidden = false
         } else {
             continueButton.isHidden = true
         }
-
     }
 
     override func viewDidAppear(_ animated: Bool) {
