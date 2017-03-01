@@ -18,8 +18,12 @@ class FacebookAPI {
     }
 
 
-    func fetchAlbums(complete: @escaping (_ albums: [FBAlbum], _ nextPage: String?) -> ()) {
-        FBSDKGraphRequest(graphPath: "/me/albums", parameters: ["fields": "name,id,cover_photo"]).start { (_, result, _) in
+    func fetchAlbums(pageCursor: String?, complete: @escaping (_ albums: [FBAlbum], _ nextPage: String?) -> ()) {
+        var parameters = ["fields": "name,id,cover_photo"]
+        if pageCursor != nil {
+            parameters.updateValue(pageCursor!, forKey: "after")
+        }
+        FBSDKGraphRequest(graphPath: "/me/albums", parameters: parameters).start { (_, result, _) in
             if let parsedResult = result as? [String: Any] {
                 var albums = [FBAlbum]()
                 var nextPage: String?

@@ -75,5 +75,18 @@ class LoginViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case Constants.segueShowAlbums:
+                if let albumsTVC = segue.destination as? AlbumsTableViewController {
+                    albumsTVC.user = user
+                }
+            default:
+                break
+            }
+        }
+    }
 }
 

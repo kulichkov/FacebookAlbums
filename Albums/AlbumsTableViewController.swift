@@ -12,7 +12,11 @@ import FBSDKLoginKit
 class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     var user: User!
-    private var nextPage: String?
+    private var nextPage: String? {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     @IBOutlet weak var tableView: UITableView!
 
     @IBAction func exit(_ sender: UIButton) {
@@ -22,24 +26,21 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     private func fetchAlbums(page: String?) {
-
+        FacebookAPI.shared.fetchAlbums(pageCursor: nextPage) { (fetchedAlbums, nextPage) in
+            if self.nextPage == nil {
+                self.user.albums = fetchedAlbums
+            } else {
+                self.user.albums.append(contentsOf: fetchedAlbums)
+            }
+            self.nextPage = nextPage
+        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        FacebookAPI.shared.getMyAlbums { result in
-            self.albums = result
-//            for eachAlbum in self.albums! {
-//                FacebookAPI.shared.getSmallImage(imageID: eachAlbum.id!) { image in
-//                    self.images.updateValue(image, forKey: eachPhoto.id!)
-//                    self.tableView.reloadData()
-//                }
-//            }
-            self.tableView.reloadData()
 
-        }
         // Do any additional setup after loading the view.
     }
 

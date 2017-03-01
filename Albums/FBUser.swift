@@ -13,7 +13,7 @@ class User: NSObject, NSCoding {
     let lastName: String
     let id: String
     let picture: UIImage
-    let albums: [FBAlbum]
+    var albums: [FBAlbum]
 
     init(firstName: String, lastName: String, id: String, picture: UIImage, albums: [FBAlbum]) {
         self.firstName = firstName
