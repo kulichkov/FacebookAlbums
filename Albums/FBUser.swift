@@ -47,7 +47,7 @@ class User: NSObject, NSCoding {
             do {
                 try encodedUserData.write(to: fbUserURL)
             } catch {
-                print("Couldn't write file")
+                print("Couldn't write user file")
             }
         }
     }
@@ -59,7 +59,7 @@ class User: NSObject, NSCoding {
             do {
                 let _ = try fileManager.removeItem(at: fbUserURL)
             } catch {
-                print("Couldn't delete file")
+                print("Couldn't delete user file")
             }
         }
     }
@@ -75,7 +75,7 @@ class User: NSObject, NSCoding {
                     return decodedUser
                 }
             } catch {
-                print("Couldn't read file")
+                print("Couldn't read user file")
             }
         }
         return nil
