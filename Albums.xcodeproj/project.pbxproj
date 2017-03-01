@@ -17,6 +17,9 @@
 		69EA8EF91E671255006560FC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA8EF81E671255006560FC /* LoginViewController.swift */; };
 		69EA8EFB1E6712B6006560FC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA8EFA1E6712B6006560FC /* Constants.swift */; };
 		69EA8F011E67180F006560FC /* FBUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA8F001E67180F006560FC /* FBUser.swift */; };
+		69EA8F031E674482006560FC /* AlbumsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA8F021E674482006560FC /* AlbumsTableViewController.swift */; };
+		69EA8F051E6744AA006560FC /* AlbumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA8F041E6744AA006560FC /* AlbumTableViewCell.swift */; };
+		69EA8F071E6745A2006560FC /* UIImageExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA8F061E6745A2006560FC /* UIImageExt.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +35,9 @@
 		69EA8EF81E671255006560FC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		69EA8EFA1E6712B6006560FC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		69EA8F001E67180F006560FC /* FBUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBUser.swift; sourceTree = "<group>"; };
+		69EA8F021E674482006560FC /* AlbumsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumsTableViewController.swift; sourceTree = "<group>"; };
+		69EA8F041E6744AA006560FC /* AlbumTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumTableViewCell.swift; sourceTree = "<group>"; };
+		69EA8F061E6745A2006560FC /* UIImageExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExt.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				69EA8EF81E671255006560FC /* LoginViewController.swift */,
+				69EA8F021E674482006560FC /* AlbumsTableViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -108,6 +115,8 @@
 		69EA8EFE1E6717AE006560FC /* View */ = {
 			isa = PBXGroup;
 			children = (
+				69EA8F041E6744AA006560FC /* AlbumTableViewCell.swift */,
+				69EA8F061E6745A2006560FC /* UIImageExt.swift */,
 				69EA8EDB1E670D4F006560FC /* Main.storyboard */,
 				69EA8EE01E670D4F006560FC /* LaunchScreen.storyboard */,
 			);
@@ -198,8 +207,11 @@
 			files = (
 				69EA8EF91E671255006560FC /* LoginViewController.swift in Sources */,
 				69EA8ED81E670D4F006560FC /* AppDelegate.swift in Sources */,
+				69EA8F071E6745A2006560FC /* UIImageExt.swift in Sources */,
 				69EA8F011E67180F006560FC /* FBUser.swift in Sources */,
 				69EA8EFB1E6712B6006560FC /* Constants.swift in Sources */,
+				69EA8F031E674482006560FC /* AlbumsTableViewController.swift in Sources */,
+				69EA8F051E6744AA006560FC /* AlbumTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
