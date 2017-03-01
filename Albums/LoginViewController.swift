@@ -28,14 +28,15 @@ class LoginViewController: UIViewController {
         let lastName = FBSDKProfile.current().lastName ?? Constants.stringBlank
         let id = FBSDKProfile.current().userID ?? Constants.stringBlank
         let picture = profilePicture.image!
-        let fbUser = User(firstName: firstName, lastName: lastName, id: id, picture: picture)
+        let albums = [FBAlbum]()
+        let fbUser = User(firstName: firstName, lastName: lastName, id: id, picture: picture, albums: albums)
         fbUser.saveToFile()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         user = User.loadFromFile()
-        loginButton.readPermissions = Constants.loginPermissions
+        loginButton.readPermissions = FacebookConstants.loginPermissions
         NotificationCenter.default.addObserver(
             forName: NSNotification.Name.FBSDKProfileDidChange, object: nil, queue: nil) { (Notification) in
                 if let profile = FBSDKProfile.current(), let firstName = profile.firstName, let lastName = profile.lastName {

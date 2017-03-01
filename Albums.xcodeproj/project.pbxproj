@@ -20,6 +20,9 @@
 		69EA8F031E674482006560FC /* AlbumsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA8F021E674482006560FC /* AlbumsTableViewController.swift */; };
 		69EA8F051E6744AA006560FC /* AlbumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA8F041E6744AA006560FC /* AlbumTableViewCell.swift */; };
 		69EA8F071E6745A2006560FC /* UIImageExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA8F061E6745A2006560FC /* UIImageExt.swift */; };
+		69EA8F091E6747B8006560FC /* FBAlbum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA8F081E6747B8006560FC /* FBAlbum.swift */; };
+		69EA8F0D1E675DCF006560FC /* FBPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA8F0C1E675DCF006560FC /* FBPhoto.swift */; };
+		69EA8F0F1E67695C006560FC /* FacebookAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA8F0E1E67695C006560FC /* FacebookAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +41,9 @@
 		69EA8F021E674482006560FC /* AlbumsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumsTableViewController.swift; sourceTree = "<group>"; };
 		69EA8F041E6744AA006560FC /* AlbumTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumTableViewCell.swift; sourceTree = "<group>"; };
 		69EA8F061E6745A2006560FC /* UIImageExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExt.swift; sourceTree = "<group>"; };
+		69EA8F081E6747B8006560FC /* FBAlbum.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBAlbum.swift; sourceTree = "<group>"; };
+		69EA8F0C1E675DCF006560FC /* FBPhoto.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBPhoto.swift; sourceTree = "<group>"; };
+		69EA8F0E1E67695C006560FC /* FacebookAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,7 +102,10 @@
 		69EA8EFC1E6712CA006560FC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				69EA8F0E1E67695C006560FC /* FacebookAPI.swift */,
 				69EA8F001E67180F006560FC /* FBUser.swift */,
+				69EA8F081E6747B8006560FC /* FBAlbum.swift */,
+				69EA8F0C1E675DCF006560FC /* FBPhoto.swift */,
 				69EA8ED71E670D4F006560FC /* AppDelegate.swift */,
 				69EA8EFA1E6712B6006560FC /* Constants.swift */,
 			);
@@ -205,6 +214,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69EA8F0D1E675DCF006560FC /* FBPhoto.swift in Sources */,
 				69EA8EF91E671255006560FC /* LoginViewController.swift in Sources */,
 				69EA8ED81E670D4F006560FC /* AppDelegate.swift in Sources */,
 				69EA8F071E6745A2006560FC /* UIImageExt.swift in Sources */,
@@ -212,6 +222,8 @@
 				69EA8EFB1E6712B6006560FC /* Constants.swift in Sources */,
 				69EA8F031E674482006560FC /* AlbumsTableViewController.swift in Sources */,
 				69EA8F051E6744AA006560FC /* AlbumTableViewCell.swift in Sources */,
+				69EA8F0F1E67695C006560FC /* FacebookAPI.swift in Sources */,
+				69EA8F091E6747B8006560FC /* FBAlbum.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

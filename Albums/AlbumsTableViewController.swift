@@ -11,16 +11,18 @@ import FBSDKLoginKit
 
 class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var albums: [Album]?
-
-    var covers = [String: UIImage]()
-
+    var user: User!
+    private var nextPage: String?
     @IBOutlet weak var tableView: UITableView!
 
     @IBAction func exit(_ sender: UIButton) {
-        let loginManager = FBSDKLoginManager()
-        loginManager.logOut()
-        self.dismiss(animated: true, completion: nil)
+        //let loginManager = FBSDKLoginManager()
+
+        //self.dismiss(animated: true, completion: nil)
+    }
+
+    private func fetchAlbums(page: String?) {
+
     }
 
     override func viewDidLoad() {
@@ -48,7 +50,7 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return albums?.count ?? 0
+        return user.albums.count
     }
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -56,25 +58,31 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let albumCell = tableView.dequeueReusableCell(withIdentifier: "Album Cell", for: indexPath) as? AlbumTableViewCell {
-                albumCell.titleLabel.text = albums![indexPath.row].name
-                let id = albums![indexPath.row].id
-            if let image = covers["\(id!)"] {
+        if let albumCell = tableView.dequeueReusableCell(withIdentifier: Constants.cellForAlbumId, for: indexPath) as? AlbumTableViewCell {
+            albumCell.titleLabel.text = user.albums[indexPath.row].name
+
+            /*
+            let id = user.albums[indexPath.row].id
+            if let image = images["\(id!)"].thumb {
                 albumCell.iconImageView.image = image
                 albumCell.activityIndicator.stopAnimating()
             } else {
-                albumCell.iconImageView.image = UIImage(named: "placeholder")
+                albumCell.iconImageView.image = UIImage(named: Constants.imageNoPhoto)
                 albumCell.activityIndicator.startAnimating()
             }
+            */
+
             return albumCell
         }
         return UITableViewCell()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let id = albums![indexPath.row].id
-        performSegue(withIdentifier: "Show Photos", sender: id)
+        //let id = user.albums[indexPath.row].id
+        //performSegue(withIdentifier: "Show Photos", sender: id)
     }
+
+/*
 
     // MARK: - Navigation
 
@@ -93,6 +101,8 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
+*/
+ 
 
 }
 

@@ -8,10 +8,17 @@
 
 import Foundation
 
-enum Constants {
+enum FacebookConstants {
+    static let dateFormat = "yyyy-MM-dd'T'HH:mm:ssZZZZ"
     static let loginPermissions = ["public_profile", "email", "user_friends", "user_photos"]
+}
+
+enum Constants {
     static let stringUnknown = "Unknown"
     static let stringBlank = ""
     static let segueShowAlbums = "Show Albums"
     static let imageNoAvatar = "noavatar"
+    static let imageNoPhoto = "nophoto"
+    static let cellForAlbumId = "Album Cell"
 }
+

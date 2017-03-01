@@ -6,7 +6,6 @@
 //  Copyright © 2017 Mikhail Kulichkov. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class User: NSObject, NSCoding {
@@ -14,12 +13,14 @@ class User: NSObject, NSCoding {
     let lastName: String
     let id: String
     let picture: UIImage
+    let albums: [FBAlbum]
 
-    init(firstName: String, lastName: String, id: String, picture: UIImage) {
+    init(firstName: String, lastName: String, id: String, picture: UIImage, albums: [FBAlbum]) {
         self.firstName = firstName
         self.lastName = lastName
         self.id = id
         self.picture = picture
+        self.albums = albums
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -27,6 +28,7 @@ class User: NSObject, NSCoding {
         self.lastName = aDecoder.decodeObject(forKey: "lastName") as! String
         self.id = aDecoder.decodeObject(forKey: "id") as! String
         self.picture = aDecoder.decodeObject(forKey: "picture") as! UIImage
+        self.albums = aDecoder.decodeObject(forKey: "albums") as! [FBAlbum]
     }
 
     func encode(with aCoder: NSCoder) {
@@ -34,6 +36,7 @@ class User: NSObject, NSCoding {
         aCoder.encode(lastName, forKey: "lastName")
         aCoder.encode(id, forKey: "id")
         aCoder.encode(picture, forKey: "picture")
+        aCoder.encode(albums, forKey: "albums")
     }
 
     func saveToFile() {

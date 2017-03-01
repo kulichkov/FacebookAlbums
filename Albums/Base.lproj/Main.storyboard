@@ -83,10 +83,10 @@
             </objects>
             <point key="canvasLocation" x="135.19999999999999" y="138.0809595202399"/>
         </scene>
-        <!--Albums View Controller-->
+        <!--Albums Table View Controller-->
         <scene sceneID="dIZ-GP-c9y">
             <objects>
-                <viewController id="G94-MB-UBk" customClass="AlbumsViewController" customModule="Albums" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="G94-MB-UBk" customClass="AlbumsTableViewController" customModule="Albums" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="G4Z-yp-yCf"/>
                         <viewControllerLayoutGuide type="bottom" id="n8J-ND-z1S"/>
@@ -115,7 +115,7 @@
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PKp-3e-tRv">
                                                     <rect key="frame" x="81" y="8" width="231" height="63"/>
-                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
