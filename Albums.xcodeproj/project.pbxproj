@@ -66,13 +66,10 @@
 		69EA8ED61E670D4F006560FC /* Albums */ = {
 			isa = PBXGroup;
 			children = (
+				69EA8EFF1E6717C7006560FC /* Resources */,
+				69EA8EFE1E6717AE006560FC /* View */,
 				69EA8EFC1E6712CA006560FC /* Model */,
-				69EA8ED71E670D4F006560FC /* AppDelegate.swift */,
-				69EA8EF81E671255006560FC /* LoginViewController.swift */,
-				69EA8EDB1E670D4F006560FC /* Main.storyboard */,
-				69EA8EDE1E670D4F006560FC /* Assets.xcassets */,
-				69EA8EE01E670D4F006560FC /* LaunchScreen.storyboard */,
-				69EA8EE31E670D4F006560FC /* Info.plist */,
+				69EA8EFD1E6717A1006560FC /* Controller */,
 			);
 			path = Albums;
 			sourceTree = "<group>";
@@ -91,9 +88,36 @@
 		69EA8EFC1E6712CA006560FC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				69EA8ED71E670D4F006560FC /* AppDelegate.swift */,
 				69EA8EFA1E6712B6006560FC /* Constants.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		69EA8EFD1E6717A1006560FC /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				69EA8EF81E671255006560FC /* LoginViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		69EA8EFE1E6717AE006560FC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				69EA8EDB1E670D4F006560FC /* Main.storyboard */,
+				69EA8EE01E670D4F006560FC /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		69EA8EFF1E6717C7006560FC /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				69EA8EDE1E670D4F006560FC /* Assets.xcassets */,
+				69EA8EE31E670D4F006560FC /* Info.plist */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
