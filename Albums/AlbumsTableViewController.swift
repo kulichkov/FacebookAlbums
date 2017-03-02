@@ -22,9 +22,8 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
     @IBOutlet weak var tableView: UITableView!
 
     @IBAction func exit(_ sender: UIButton) {
-        //let loginManager = FBSDKLoginManager()
-
-        //self.dismiss(animated: true, completion: nil)
+        FBSDKLoginManager().logOut()
+        self.dismiss(animated: true, completion: nil)
     }
 
     private func fetchAlbums() {

@@ -72,7 +72,7 @@ class LoginViewController: UIViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        //if loggedIn { performSegue(withIdentifier: Constants.segueShowAlbums, sender: nil) }
+        if loggedIn { performSegue(withIdentifier: Constants.segueShowAlbums, sender: nil) }
     }
 
     override func didReceiveMemoryWarning() {
