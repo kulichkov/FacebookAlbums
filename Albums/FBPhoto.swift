@@ -48,7 +48,15 @@ class FBPhoto: NSObject, NSCoding {
         aCoder.encode(created, forKey: "created")
         aCoder.encode(location?.name, forKey: "location.name")
         aCoder.encode(location?.id, forKey: "location.id")
-        aCoder.encode(location?.latitude, forKey: "location.latitude")
-        aCoder.encode(location?.longitude, forKey: "location.longitude")
+        if let latitude = location?.latitude {
+            aCoder.encode(latitude, forKey: "location.latitude")
+        } else {
+            aCoder.encode(nil, forKey: "location.latitude")
+        }
+        if let longitude = location?.longitude {
+            aCoder.encode(longitude, forKey: "location.longitude")
+        } else {
+            aCoder.encode(nil, forKey: "location.longitude")
+        }
     }
 }

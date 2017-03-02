@@ -66,17 +66,17 @@ struct FacebookAPI {
                         let name = eachPhoto["name"] as? String ?? Constants.stringBlank
                         let createdString = eachPhoto["created_time"] as? String ?? Constants.stringBlank
                         let created = dateFormatter.date(from: createdString)
-                        //var fbLocation: FBLocation?
-//                        if let place = eachPhoto["place"] as? [String: Any] {
-//                            let placeId = place["id"] as? String ?? Constants.stringBlank
-//                            let placeName = place["name"] as? String ?? Constants.stringBlank
-//                            if let location = place["location"] as? [String: Any] {
-//                                if let latitude = location["latitude"] as? Float, let longitude = location["longitude"] as? Float {
-//                                fbLocation = FBLocation(id:placeId, name: placeName, latitude: latitude, longitude: longitude)
-//                                }
-//                            }
-//                        }
-                        let photo = FBPhoto(id: id, name: name, created: created, location: nil)
+                        var fbLocation: FBLocation?
+                        if let place = eachPhoto["place"] as? [String: Any] {
+                            let placeId = place["id"] as? String ?? Constants.stringBlank
+                            let placeName = place["name"] as? String ?? Constants.stringBlank
+                            if let location = place["location"] as? [String: Any] {
+                                if let latitude = location["latitude"] as? Float, let longitude = location["longitude"] as? Float {
+                                fbLocation = FBLocation(id:placeId, name: placeName, latitude: latitude, longitude: longitude)
+                                }
+                            }
+                        }
+                        let photo = FBPhoto(id: id, name: name, created: created, location: fbLocation)
                         photos.append(photo)
                     }
                 }
