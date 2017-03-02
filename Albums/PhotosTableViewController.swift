@@ -91,7 +91,7 @@ class PhotosTableViewController: UIViewController, UITableViewDelegate, UITableV
             } else {
                 photoCell.photo.image = UIImage(named: Constants.imageNoPhoto)
                 photoCell.activityIndicator.startAnimating()
-                FacebookAPI.shared.getImage(imageID: imageId, maxHeight: 200, maxWidth: 200) { image in
+                FacebookAPI.shared.getImage(imageID: imageId, full:false) { image in
                     ImagesRepo.shared.updateThumb(image: image, id: imageId)
                     self.tableView.reloadData()
                 }

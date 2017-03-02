@@ -93,28 +93,28 @@ struct FacebookAPI {
     }
 
 
-    func getImage(imageID: String, maxHeight: Int, maxWidth: Int, complete: @escaping (_ image: UIImage) -> ()) {
+    func getImage(imageID: String, full: Bool, complete: @escaping (_ image: UIImage) -> ()) {
         FBSDKGraphRequest(graphPath: "/\(imageID)", parameters: ["fields": "images"]).start { (_, result, _) in
             if let parsedResult = result as? [String: Any] {
                 if let images = parsedResult["images"] as? [[String: Any]] {
+                    var imagesArray = [[Int: String]]()
                     for eachImage in images {
-                        if let imageHeight = eachImage["height"] as? Int, let imageWidth = eachImage["width"] as? Int {
-                            if imageHeight <= maxHeight || imageWidth <= maxWidth {
-                                if let imageURL = eachImage["source"] as? String {
-                                    let pictureURL = URL(string: imageURL)!
-                                    self.urlSession.dataTask(with: pictureURL, completionHandler: { (imageData, _, _) in
-                                        if imageData != nil {
-                                            let image = UIImage(data: imageData!)
-                                            DispatchQueue.main.sync {
-                                                complete(image!)
-                                            }
-                                        }
-                                    }).resume()
-
-                                }
+                        let imageHeight = eachImage["height"] as! Int
+                        let imageSource = eachImage["source"] as! String
+                        imagesArray.append([imageHeight: imageSource])
+                    }
+                    imagesArray.sort { $0.keys.first! > $1.keys.first! }
+                    let source = full ? imagesArray.first?.values.first : imagesArray.last?.values.first
+                    let pictureURL = URL(string: source!)!
+                    self.urlSession.dataTask(with: pictureURL, completionHandler: { (imageData, _, _) in
+                        if imageData != nil {
+                            let image = UIImage(data: imageData!)
+                            DispatchQueue.main.sync {
+                                complete(image!)
                             }
                         }
-                    }
+                    }).resume()
+
                 }
             }
         }

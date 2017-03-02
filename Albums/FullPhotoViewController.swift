@@ -10,6 +10,7 @@ import UIKit
 
 class FullPhotoViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var locationButton: UIButton!
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
     @IBOutlet weak var scrollView: UIScrollView! {
         didSet {
@@ -20,7 +21,6 @@ class FullPhotoViewController: UIViewController, UIScrollViewDelegate {
         }
     }
     var photo: FBPhoto!
-    private var imageView = UIImageView()
     private var image: UIImage? {
         get {
             return imageView.image
@@ -42,7 +42,7 @@ class FullPhotoViewController: UIViewController, UIScrollViewDelegate {
             image = savedImage
         } else {
             indicator.startAnimating()
-            FacebookAPI.shared.getImage(imageID: photo.id, maxHeight: 1080, maxWidth: 1080) { fetchedImage in
+            FacebookAPI.shared.getImage(imageID: photo.id, full:true) { fetchedImage in
                 self.indicator.stopAnimating()
                 self.image = fetchedImage
                 ImagesRepo.shared.updateImage(image: fetchedImage, id: self.photo.id)
@@ -56,7 +56,6 @@ class FullPhotoViewController: UIViewController, UIScrollViewDelegate {
         } else {
             locationButton.isHidden = true
         }
-        scrollView.addSubview(imageView)
     }
 
 }

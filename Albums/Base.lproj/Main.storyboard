@@ -338,6 +338,9 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jiG-IJ-lub">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="440"/>
                             </scrollView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gZd-UD-OXC">
+                                <rect key="frame" x="0.0" y="64" width="320" height="376"/>
+                            </imageView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="fN8-Nw-6G7">
                                 <rect key="frame" x="142" y="222" width="37" height="37"/>
                                 <color key="color" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -345,9 +348,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="gZd-UD-OXC" firstAttribute="leading" secondItem="1eB-Ol-YpW" secondAttribute="leading" id="7pM-hf-IdA"/>
                             <constraint firstItem="jiG-IJ-lub" firstAttribute="leading" secondItem="1eB-Ol-YpW" secondAttribute="leading" id="ENt-th-GYq"/>
+                            <constraint firstAttribute="trailing" secondItem="gZd-UD-OXC" secondAttribute="trailing" id="F5T-HS-l8l"/>
                             <constraint firstItem="IPL-0h-TlZ" firstAttribute="top" secondItem="IWb-s6-xc2" secondAttribute="bottom" id="Gr7-6t-2uv"/>
                             <constraint firstItem="fN8-Nw-6G7" firstAttribute="centerX" secondItem="1eB-Ol-YpW" secondAttribute="centerX" id="HEY-oh-8OY"/>
+                            <constraint firstItem="IWb-s6-xc2" firstAttribute="top" secondItem="gZd-UD-OXC" secondAttribute="bottom" id="VYI-R0-QhP"/>
+                            <constraint firstItem="gZd-UD-OXC" firstAttribute="top" secondItem="TtY-T9-gGe" secondAttribute="bottom" id="bud-qr-miK"/>
                             <constraint firstItem="IWb-s6-xc2" firstAttribute="top" secondItem="jiG-IJ-lub" secondAttribute="bottom" id="c5V-Gk-inN"/>
                             <constraint firstAttribute="trailing" secondItem="IWb-s6-xc2" secondAttribute="trailing" id="df1-Tk-xKO"/>
                             <constraint firstItem="fN8-Nw-6G7" firstAttribute="centerY" secondItem="1eB-Ol-YpW" secondAttribute="centerY" id="hg6-Wh-fCh"/>
@@ -357,6 +364,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="imageView" destination="gZd-UD-OXC" id="haW-SQ-RfL"/>
                         <outlet property="indicator" destination="fN8-Nw-6G7" id="APR-sc-BtT"/>
                         <outlet property="locationButton" destination="NqY-sA-78u" id="iIK-HK-xJY"/>
                         <outlet property="scrollView" destination="jiG-IJ-lub" id="vcv-et-6Yc"/>
