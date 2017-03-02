@@ -106,15 +106,10 @@ struct FacebookAPI {
                     imagesArray.sort { $0.keys.first! > $1.keys.first! }
                     let source = full ? imagesArray.first?.values.first : imagesArray.last?.values.first
                     let pictureURL = URL(string: source!)!
-                    self.urlSession.dataTask(with: pictureURL, completionHandler: { (imageData, _, _) in
-                        if imageData != nil {
-                            let image = UIImage(data: imageData!)
-                            DispatchQueue.main.sync {
-                                complete(image!)
-                            }
-                        }
-                    }).resume()
-
+                    if let imageData = try? Data(contentsOf: pictureURL) {
+                        let image = UIImage(data: imageData)
+                        complete(image!)
+                    }
                 }
             }
         }

@@ -42,10 +42,14 @@ class FullPhotoViewController: UIViewController, UIScrollViewDelegate {
             image = savedImage
         } else {
             indicator.startAnimating()
-            FacebookAPI.shared.getImage(imageID: photo.id, full:true) { fetchedImage in
-                self.indicator.stopAnimating()
-                self.image = fetchedImage
-                ImagesRepo.shared.updateImage(image: fetchedImage, id: self.photo.id)
+            DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
+                FacebookAPI.shared.getImage(imageID: self.photo.id, full:true) { fetchedImage in
+                    ImagesRepo.shared.updateImage(image: fetchedImage, id: self.photo.id)
+                    DispatchQueue.main.async {
+                        self.indicator.stopAnimating()
+                        self.image = fetchedImage
+                    }
+                }
             }
         }
     }

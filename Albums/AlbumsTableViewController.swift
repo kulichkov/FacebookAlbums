@@ -72,9 +72,13 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
             } else {
                 albumCell.iconImageView.image = UIImage(named: Constants.imageNoPhoto)
                 albumCell.activityIndicator.startAnimating()
-                FacebookAPI.shared.getImage(imageID: id, full: false) { image in
-                    ImagesRepo.shared.updateThumb(image: image, id: id)
-                    self.tableView.reloadData()
+                DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
+                    FacebookAPI.shared.getImage(imageID: id, full: false) { image in
+                        ImagesRepo.shared.updateThumb(image: image, id: id)
+                        DispatchQueue.main.async {
+                            self.tableView.reloadData()
+                        }
+                    }
                 }
             }
             return albumCell
