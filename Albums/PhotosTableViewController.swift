@@ -84,7 +84,6 @@ class PhotosTableViewController: UIViewController, UITableViewDelegate, UITableV
             if let createdTime = user.albums[self.albumIndex].photos[indexPath.row].created {
                 photoCell.createdLabel.text = "Created: " + dateFormatter.string(from: createdTime)
             }
-            
             let imageId = user.albums[self.albumIndex].photos[indexPath.row].id
             if let image = ImagesRepo.shared.thumb(id: imageId) {
                 photoCell.activityIndicator.stopAnimating()
@@ -95,7 +94,6 @@ class PhotosTableViewController: UIViewController, UITableViewDelegate, UITableV
                 FacebookAPI.shared.getImage(imageID: imageId, maxHeight: 200, maxWidth: 200) { image in
                     ImagesRepo.shared.updateThumb(image: image, id: imageId)
                     self.tableView.reloadData()
-
                 }
             }
             return photoCell
@@ -103,4 +101,25 @@ class PhotosTableViewController: UIViewController, UITableViewDelegate, UITableV
         return UITableViewCell()
     }
 
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let photo = user.albums[self.albumIndex].photos[indexPath.row]
+        performSegue(withIdentifier: Constants.segueShowFullPhoto, sender: photo)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case Constants.segueShowFullPhoto:
+                if let destination = segue.destination as? FullPhotoViewController
+                {
+                    destination.photo = sender as? FBPhoto
+                }
+            default:
+                break
+            }
+        }
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    
 }

@@ -16,6 +16,7 @@ enum FacebookConstants {
 enum Constants {
     static let stringUnknown = "Unknown"
     static let stringBlank = ""
+    static let segueShowFullPhoto = "Show Full Photo"
     static let segueShowAlbums = "Show Albums"
     static let segueShowPhotos = "Show Photos"
     static let imageNoAvatar = "noavatar"

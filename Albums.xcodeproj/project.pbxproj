@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		69C33ABB1E684ED300C4C997 /* FullPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C33ABA1E684ED300C4C997 /* FullPhotoViewController.swift */; };
 		69EA8ED81E670D4F006560FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA8ED71E670D4F006560FC /* AppDelegate.swift */; };
 		69EA8EDD1E670D4F006560FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69EA8EDB1E670D4F006560FC /* Main.storyboard */; };
 		69EA8EDF1E670D4F006560FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69EA8EDE1E670D4F006560FC /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		69C33ABA1E684ED300C4C997 /* FullPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullPhotoViewController.swift; sourceTree = "<group>"; };
 		69EA8ED41E670D4F006560FC /* Albums.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Albums.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69EA8ED71E670D4F006560FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		69EA8EDC1E670D4F006560FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -125,6 +127,7 @@
 		69EA8EFD1E6717A1006560FC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				69C33ABA1E684ED300C4C997 /* FullPhotoViewController.swift */,
 				69EA8F151E67F4BB006560FC /* PhotosTableViewController.swift */,
 				69EA8EF81E671255006560FC /* LoginViewController.swift */,
 				69EA8F021E674482006560FC /* AlbumsTableViewController.swift */,
@@ -238,6 +241,7 @@
 				69EA8F0F1E67695C006560FC /* FacebookAPI.swift in Sources */,
 				69EA8F161E67F4BB006560FC /* PhotoTableViewCell.swift in Sources */,
 				69EA8F171E67F4BB006560FC /* PhotosTableViewController.swift in Sources */,
+				69C33ABB1E684ED300C4C997 /* FullPhotoViewController.swift in Sources */,
 				69EA8F091E6747B8006560FC /* FBAlbum.swift in Sources */,
 				69EA8F131E6783C8006560FC /* FBImage.swift in Sources */,
 			);
@@ -411,6 +415,7 @@
 				69EA8EE81E670D4F006560FC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
