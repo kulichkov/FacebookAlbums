@@ -62,24 +62,25 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let albumCell = tableView.dequeueReusableCell(withIdentifier: Constants.cellForAlbumId, for: indexPath) as? AlbumTableViewCell {
             albumCell.titleLabel.text = user.albums[indexPath.row].name
-
-            /*
-            let id = user.albums[indexPath.row].id
-            if let image = images["\(id!)"].thumb {
+            let id = user.albums[indexPath.row].coverId
+            if let image = ImagesRepo.shared.thumb(id: id) {
                 albumCell.iconImageView.image = image
                 albumCell.activityIndicator.stopAnimating()
             } else {
                 albumCell.iconImageView.image = UIImage(named: Constants.imageNoPhoto)
                 albumCell.activityIndicator.startAnimating()
+                FacebookAPI.shared.getImage(imageID: id, height: 200) { image in
+                    ImagesRepo.shared.updateThumb(image: image, id: id)
+                    self.tableView.reloadData()
+                }
             }
-            */
-
             return albumCell
         }
         return UITableViewCell()
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        ImagesRepo.shared.saveToFile()
         //let id = user.albums[indexPath.row].id
         //performSegue(withIdentifier: "Show Photos", sender: id)
     }

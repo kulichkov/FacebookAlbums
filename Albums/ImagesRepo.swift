@@ -13,40 +13,47 @@ class ImagesRepo: NSObject, NSCoding {
         if let singleton = loadFromFile() {
             return singleton
         }
-        return ImagesRepo(images: [String : FBImage]())
+        return ImagesRepo(images: [String: UIImage](), thumbs: [String: UIImage]())
     }()
 
-    private var images: [String: FBImage]
+    private var images: [String: UIImage]
+    private var thumbs: [String: UIImage]
 
     func image(id: String) -> UIImage? {
-        if let image = images[id]?.image {
+        if let image = images[id] {
             return image
         }
         return nil
     }
 
     func thumb(id: String) -> UIImage? {
-        if let thumb = images[id]?.thumb {
+        if let thumb = thumbs[id] {
             return thumb
         }
         return nil
     }
 
-    func updateImageAndThumb(image: UIImage, thumb: UIImage, id: String) {
-        let fbImage = FBImage(image: image, thumb: thumb)
-        images.updateValue(fbImage, forKey: id)
+    func updateImage(image: UIImage, id: String) {
+        images.updateValue(image, forKey: id)
     }
 
-    init(images: [String: FBImage]) {
+    func updateThumb(image: UIImage, id: String) {
+        thumbs.updateValue(image, forKey: id)
+    }
+
+    init(images: [String: UIImage], thumbs: [String: UIImage]) {
         self.images = images
+        self.thumbs = thumbs
     }
 
     required init?(coder aDecoder: NSCoder) {
-        self.images = aDecoder.decodeObject(forKey: "images") as! [String: FBImage]
+        self.images = aDecoder.decodeObject(forKey: "images") as! [String: UIImage]
+        self.thumbs = aDecoder.decodeObject(forKey: "thumbs") as! [String: UIImage]
     }
 
     func encode(with aCoder: NSCoder) {
         aCoder.encode(images, forKey: "images")
+        aCoder.encode(thumbs, forKey: "thumbs")
     }
 
     func saveToFile() {
