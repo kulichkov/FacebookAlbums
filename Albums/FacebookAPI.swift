@@ -11,11 +11,6 @@ import FBSDKCoreKit
 
 class FacebookAPI {
     static let shared = FacebookAPI()
-    private var dateFormatter: DateFormatter {
-        let formatter = DateFormatter()
-        formatter.dateFormat = FacebookConstants.dateFormat
-        return formatter
-    }
 
     func fetchAlbums(pageCursor: String?, complete: @escaping (_ albums: [FBAlbum], _ nextPage: String?) -> ()) {
         var parameters = ["fields": "name,id,cover_photo"]
@@ -50,6 +45,51 @@ class FacebookAPI {
         }
     }
 
+    func fetchPhotos(albumId: String, pageCursor: String?, complete: @escaping (_ photos: [FBPhoto], _ nextPage: String?) -> ()) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .none
+        dateFormatter.dateStyle = .short
+        dateFormatter.dateFormat = FacebookConstants.dateFormat
+
+        var parameters = ["fields": "name,created_time,place"]
+        if pageCursor != nil {
+            parameters.updateValue(pageCursor!, forKey: "after")
+        }
+        FBSDKGraphRequest(graphPath: "/\(albumId)/photos", parameters: parameters).start { (_, result, _) in
+            if let parsedResult = result as? [String: Any] {
+                var photos = [FBPhoto]()
+                var nextPage: String?
+                if let data = parsedResult["data"] as? [[String: Any]] {
+                    for eachPhoto in data {
+                        let id = eachPhoto["id"] as? String ?? Constants.stringBlank
+                        let name = eachPhoto["name"] as? String ?? Constants.stringBlank
+                        let createdString = eachPhoto["created_time"] as? String ?? Constants.stringBlank
+                        let created = dateFormatter.date(from: createdString)
+                        var fbLocation: FBLocation?
+                        if let place = eachPhoto["place"] as? [String: Any] {
+                            let placeId = place["id"] as? String ?? Constants.stringBlank
+                            let placeName = place["name"] as? String ?? Constants.stringBlank
+                            if let location = place["location"] as? [String: Any] {
+                                let latitude = location["latitude"] as! Double
+                                let longitude = location["longitude"] as! Double
+                                fbLocation = FBLocation(id:placeId, name: placeName, latitude: latitude, longitude: longitude)
+                            }
+                        }
+                        let photo = FBPhoto(id: id, name: name, created: created, location: fbLocation)
+                        photos.append(photo)
+                    }
+                }
+                if let paging = parsedResult["paging"] as? [String: Any] {
+                    if let cursors = paging["cursors"] as? [String: String] {
+                        if let after = cursors["after"] {
+                            nextPage = after
+                        }
+                    }
+                }
+                complete(photos, nextPage)
+            }
+        }
+    }
 
 //    func getPhotos(albumID: String, pageCursor: String?, complete: @escaping (_ photos: [Photo], _ nextPage: String?) -> ()) {
 //        let dateFormatter = DateFormatter()

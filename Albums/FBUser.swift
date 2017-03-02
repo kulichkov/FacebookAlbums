@@ -8,7 +8,7 @@
 
 import UIKit
 
-class User: NSObject, NSCoding {
+class FBUser: NSObject, NSCoding {
     let firstName: String
     let lastName: String
     let id: String
@@ -65,13 +65,13 @@ class User: NSObject, NSCoding {
     }
 
 
-    static func loadFromFile() -> User? {
+    static func loadFromFile() -> FBUser? {
         let fileManager = FileManager.default
         if let userURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask).first {
             let fbUserURL = userURL.appendingPathComponent("FBUser")
             do {
                 let encodedUserData = try Data(contentsOf: fbUserURL)
-                if let decodedUser = NSKeyedUnarchiver.unarchiveObject(with: encodedUserData) as? User {
+                if let decodedUser = NSKeyedUnarchiver.unarchiveObject(with: encodedUserData) as? FBUser {
                     return decodedUser
                 }
             } catch {

@@ -12,7 +12,7 @@ class FBAlbum: NSObject, NSCoding {
     let id: String
     let name: String
     let coverId: String
-    let photos: [FBPhoto]
+    var photos: [FBPhoto]
 
     init(id: String, name: String, coverId: String, photos: [FBPhoto]) {
         self.id = id

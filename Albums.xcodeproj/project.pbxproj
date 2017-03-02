@@ -25,6 +25,8 @@
 		69EA8F0F1E67695C006560FC /* FacebookAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA8F0E1E67695C006560FC /* FacebookAPI.swift */; };
 		69EA8F111E678005006560FC /* ImagesRepo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA8F101E678005006560FC /* ImagesRepo.swift */; };
 		69EA8F131E6783C8006560FC /* FBImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA8F121E6783C8006560FC /* FBImage.swift */; };
+		69EA8F161E67F4BB006560FC /* PhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA8F141E67F4BB006560FC /* PhotoTableViewCell.swift */; };
+		69EA8F171E67F4BB006560FC /* PhotosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA8F151E67F4BB006560FC /* PhotosTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +50,8 @@
 		69EA8F0E1E67695C006560FC /* FacebookAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookAPI.swift; sourceTree = "<group>"; };
 		69EA8F101E678005006560FC /* ImagesRepo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesRepo.swift; sourceTree = "<group>"; };
 		69EA8F121E6783C8006560FC /* FBImage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FBImage.swift; sourceTree = "<group>"; };
+		69EA8F141E67F4BB006560FC /* PhotoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoTableViewCell.swift; sourceTree = "<group>"; };
+		69EA8F151E67F4BB006560FC /* PhotosTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +125,7 @@
 		69EA8EFD1E6717A1006560FC /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				69EA8F151E67F4BB006560FC /* PhotosTableViewController.swift */,
 				69EA8EF81E671255006560FC /* LoginViewController.swift */,
 				69EA8F021E674482006560FC /* AlbumsTableViewController.swift */,
 			);
@@ -131,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				69EA8F041E6744AA006560FC /* AlbumTableViewCell.swift */,
+				69EA8F141E67F4BB006560FC /* PhotoTableViewCell.swift */,
 				69EA8F061E6745A2006560FC /* UIImageExt.swift */,
 				69EA8EDB1E670D4F006560FC /* Main.storyboard */,
 				69EA8EE01E670D4F006560FC /* LaunchScreen.storyboard */,
@@ -230,6 +236,8 @@
 				69EA8F031E674482006560FC /* AlbumsTableViewController.swift in Sources */,
 				69EA8F051E6744AA006560FC /* AlbumTableViewCell.swift in Sources */,
 				69EA8F0F1E67695C006560FC /* FacebookAPI.swift in Sources */,
+				69EA8F161E67F4BB006560FC /* PhotoTableViewCell.swift in Sources */,
+				69EA8F171E67F4BB006560FC /* PhotosTableViewController.swift in Sources */,
 				69EA8F091E6747B8006560FC /* FBAlbum.swift in Sources */,
 				69EA8F131E6783C8006560FC /* FBImage.swift in Sources */,
 			);

@@ -17,8 +17,10 @@ enum Constants {
     static let stringUnknown = "Unknown"
     static let stringBlank = ""
     static let segueShowAlbums = "Show Albums"
+    static let segueShowPhotos = "Show Photos"
     static let imageNoAvatar = "noavatar"
     static let imageNoPhoto = "nophoto"
+    static let cellForPhotoId = "Photo Cell"
     static let cellForAlbumId = "Album Cell"
 }
 

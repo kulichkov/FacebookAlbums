@@ -11,7 +11,7 @@ import FBSDKLoginKit
 
 class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
-    var user: User!
+    var user: FBUser!
     private var nextPage: String? {
         didSet {
             tableView.reloadData()
@@ -81,11 +81,11 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //let id = user.albums[indexPath.row].id
-        //performSegue(withIdentifier: "Show Photos", sender: id)
+        let selectedAlbum = user.albums[indexPath.row]
+        performSegue(withIdentifier: Constants.segueShowPhotos, sender: selectedAlbum)
     }
 
-/*
+
 
     // MARK: - Navigation
 
@@ -93,9 +93,10 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let identifier = segue.identifier {
             switch identifier {
-            case "Show Photos":
-                if let destination = segue.destination as? PhotosViewController {
-                    destination.albumID = sender as! String
+            case Constants.segueShowPhotos:
+                if let destination = segue.destination as? PhotosTableViewController
+                {
+                    destination.currentAlbum = sender as! FBAlbum
                 }
             default:
                 break
@@ -103,12 +104,6 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
         }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-    }
-*/
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        ImagesRepo.shared.saveToFile()
     }
 
 }

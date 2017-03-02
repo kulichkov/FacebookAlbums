@@ -21,7 +21,7 @@ class LoginViewController: UIViewController {
         }
         return false
     }
-    private var user: User?
+    private var user: FBUser?
 
     private func saveProfile() {
         let firstName = FBSDKProfile.current().firstName ?? Constants.stringBlank
@@ -29,14 +29,14 @@ class LoginViewController: UIViewController {
         let id = FBSDKProfile.current().userID ?? Constants.stringBlank
         let picture = profilePicture.image!
         let albums = [FBAlbum]()
-        let fbUser = User(firstName: firstName, lastName: lastName, id: id, picture: picture, albums: albums)
+        let fbUser = FBUser(firstName: firstName, lastName: lastName, id: id, picture: picture, albums: albums)
         fbUser.saveToFile()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         _ = ImagesRepo.shared
-        user = User.loadFromFile()
+        user = FBUser.loadFromFile()
         loginButton.readPermissions = FacebookConstants.loginPermissions
         NotificationCenter.default.addObserver(
             forName: NSNotification.Name.FBSDKProfileDidChange, object: nil, queue: nil) { (Notification) in
@@ -53,7 +53,7 @@ class LoginViewController: UIViewController {
                     self.userNameLabel.text = Constants.stringBlank
                     self.profilePicture.image = UIImage(named: Constants.imageNoAvatar)
                     self.continueButton.isHidden = true
-                    User.deleteFile()
+                    FBUser.deleteFile()
                 }
         }
         FBSDKProfile.enableUpdates(onAccessTokenChange: true)
