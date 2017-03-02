@@ -183,13 +183,13 @@ class FacebookAPI {
 //    }
 //
 
-    func getImage(imageID: String, height: Int, complete: @escaping (_ image: UIImage) -> ()) {
+    func getImage(imageID: String, maxHeight: Int, maxWidth: Int, complete: @escaping (_ image: UIImage) -> ()) {
         FBSDKGraphRequest(graphPath: "/\(imageID)", parameters: ["fields": "images"]).start { (_, result, _) in
             if let parsedResult = result as? [String: Any] {
                 if let images = parsedResult["images"] as? [[String: Any]] {
                     for eachImage in images {
-                        if let imageHeight = eachImage["height"] as? Int {
-                            if imageHeight < height {
+                        if let imageHeight = eachImage["height"] as? Int, let imageWidth = eachImage["width"] as? Int {
+                            if imageHeight <= maxHeight || imageWidth <= maxWidth {
                                 if let imageURL = eachImage["source"] as? String {
                                     let pictureURL = URL(string: imageURL)!
                                     let urlSession = URLSession(configuration: .default)

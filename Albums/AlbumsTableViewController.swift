@@ -69,9 +69,10 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
             } else {
                 albumCell.iconImageView.image = UIImage(named: Constants.imageNoPhoto)
                 albumCell.activityIndicator.startAnimating()
-                FacebookAPI.shared.getImage(imageID: id, height: 200) { image in
+                FacebookAPI.shared.getImage(imageID: id, maxHeight: 200, maxWidth: 200) { image in
                     ImagesRepo.shared.updateThumb(image: image, id: id)
                     self.tableView.reloadData()
+
                 }
             }
             return albumCell
@@ -80,7 +81,6 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        ImagesRepo.shared.saveToFile()
         //let id = user.albums[indexPath.row].id
         //performSegue(withIdentifier: "Show Photos", sender: id)
     }
@@ -105,7 +105,11 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
         // Pass the selected object to the new view controller.
     }
 */
- 
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        ImagesRepo.shared.saveToFile()
+    }
 
 }
 
