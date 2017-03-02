@@ -11,8 +11,8 @@ import Foundation
 struct FBLocation {
     let id: String
     let name: String
-    let latitude: Double
-    let longitude: Double
+    let latitude: Float
+    let longitude: Float
 }
 
 class FBPhoto: NSObject, NSCoding {
@@ -32,11 +32,10 @@ class FBPhoto: NSObject, NSCoding {
         self.id = aDecoder.decodeObject(forKey: "id") as! String
         self.name = aDecoder.decodeObject(forKey: "name") as! String
         self.created = aDecoder.decodeObject(forKey: "created") as? Date
-        let locationId = aDecoder.decodeObject(forKey: "location.id") as! String
-        if locationId != Constants.stringBlank {
+        if let locationId = aDecoder.decodeObject(forKey: "location.id") as? String, locationId != Constants.stringBlank {
             let locationName = aDecoder.decodeObject(forKey: "location.name") as! String
-            let latitude = aDecoder.decodeDouble(forKey: "location.latitude")
-            let longitude = aDecoder.decodeDouble(forKey: "location.longitude")
+            let latitude = aDecoder.decodeFloat(forKey: "location.latitude")
+            let longitude = aDecoder.decodeFloat(forKey: "location.longitude")
             self.location = FBLocation(id: locationId, name: locationName, latitude: latitude, longitude: longitude)
         } else {
             self.location = nil

@@ -46,6 +46,7 @@ class FBUser: NSObject, NSCoding {
             let fbUserURL = userURL.appendingPathComponent("FBUser")
             do {
                 try encodedUserData.write(to: fbUserURL)
+                print("User file saved")
             } catch {
                 print("Couldn't write user file")
             }
@@ -58,6 +59,7 @@ class FBUser: NSObject, NSCoding {
             let fbUserURL = userURL.appendingPathComponent("FBUser")
             do {
                 let _ = try fileManager.removeItem(at: fbUserURL)
+                print("User file removed")
             } catch {
                 print("Couldn't delete user file")
             }
@@ -72,6 +74,7 @@ class FBUser: NSObject, NSCoding {
             do {
                 let encodedUserData = try Data(contentsOf: fbUserURL)
                 if let decodedUser = NSKeyedUnarchiver.unarchiveObject(with: encodedUserData) as? FBUser {
+                    print("User file loaded")
                     return decodedUser
                 }
             } catch {

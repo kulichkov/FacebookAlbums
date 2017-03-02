@@ -13,8 +13,9 @@ class PhotosTableViewController: UIViewController, UITableViewDelegate, UITableV
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var footer: UIView!
-    
-    var currentAlbum: FBAlbum!
+
+    var user: FBUser!
+    var albumIndex: Int!
     private var isLoading = false
     private var nextPage: String? {
         didSet {
@@ -22,12 +23,13 @@ class PhotosTableViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     private func fetchPhotos() {
-        FacebookAPI.shared.fetchPhotos(albumId: currentAlbum.id, pageCursor: nextPage) { (fetchedPhotos, nextPage) in
+        FacebookAPI.shared.fetchPhotos(albumId: user.albums[self.albumIndex].id, pageCursor: nextPage) { (fetchedPhotos, nextPage) in
             if self.nextPage == nil {
-                self.currentAlbum.photos = fetchedPhotos
+                self.user.albums[self.albumIndex].photos = fetchedPhotos
             } else {
-                self.currentAlbum.photos.append(contentsOf: fetchedPhotos)
+                self.user.albums[self.albumIndex].photos.append(contentsOf: fetchedPhotos)
             }
+            self.user.saveToFile()
             self.nextPage = nextPage
         }
     }
@@ -63,7 +65,7 @@ class PhotosTableViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let endOfTable = (scrollView.contentOffset.y >= (CGFloat(currentAlbum.photos.count * 120) - scrollView.frame.size.height))
+        let endOfTable = (scrollView.contentOffset.y >= (CGFloat(user.albums[self.albumIndex].photos.count * 120) - scrollView.frame.size.height))
 
         if (nextPage != nil && endOfTable && !isLoading && !scrollView.isDragging && !scrollView.isDecelerating)
         {
@@ -87,7 +89,7 @@ class PhotosTableViewController: UIViewController, UITableViewDelegate, UITableV
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return  currentAlbum.photos.count
+        return  user.albums[self.albumIndex].photos.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -95,12 +97,12 @@ class PhotosTableViewController: UIViewController, UITableViewDelegate, UITableV
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .none
         if let photoCell = tableView.dequeueReusableCell(withIdentifier: Constants.cellForPhotoId, for: indexPath) as? PhotoTableViewCell {
-            photoCell.titleLabel.text = currentAlbum.photos[indexPath.row].name
-            if let createdTime = currentAlbum.photos[indexPath.row].created {
+            photoCell.titleLabel.text = user.albums[self.albumIndex].photos[indexPath.row].name
+            if let createdTime = user.albums[self.albumIndex].photos[indexPath.row].created {
                 photoCell.createdLabel.text = "Created: " + dateFormatter.string(from: createdTime)
             }
             
-            let imageId = currentAlbum.photos[indexPath.row].id
+            let imageId = user.albums[self.albumIndex].photos[indexPath.row].id
             if let image = ImagesRepo.shared.thumb(id: imageId) {
                 photoCell.activityIndicator.stopAnimating()
                 photoCell.photo.image = image

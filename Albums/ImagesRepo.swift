@@ -63,6 +63,7 @@ class ImagesRepo: NSObject, NSCoding {
             let fbImagesRepoURL = imagesRepoURL.appendingPathComponent("ImagesRepo")
             do {
                 try encodedImagesRepoData.write(to: fbImagesRepoURL)
+                print("ImagesRepo file saved")
             } catch {
                 print("Couldn't write ImagesRepo file")
             }
@@ -76,6 +77,7 @@ class ImagesRepo: NSObject, NSCoding {
             do {
                 let encodedImagesRepoData = try Data(contentsOf: fbImagesRepoURL)
                 if let decodedImagesRepo = NSKeyedUnarchiver.unarchiveObject(with: encodedImagesRepoData) as? ImagesRepo {
+                    print("ImagesRepo file loaded")
                     return decodedImagesRepo
                 }
             } catch {

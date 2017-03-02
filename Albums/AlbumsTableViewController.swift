@@ -81,8 +81,7 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedAlbum = user.albums[indexPath.row]
-        performSegue(withIdentifier: Constants.segueShowPhotos, sender: selectedAlbum)
+        performSegue(withIdentifier: Constants.segueShowPhotos, sender: indexPath.row)
     }
 
 
@@ -96,7 +95,8 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
             case Constants.segueShowPhotos:
                 if let destination = segue.destination as? PhotosTableViewController
                 {
-                    destination.currentAlbum = sender as! FBAlbum
+                    destination.user = user
+                    destination.albumIndex = sender as! Int
                 }
             default:
                 break

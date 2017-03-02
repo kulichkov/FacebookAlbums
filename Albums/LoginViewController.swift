@@ -31,12 +31,12 @@ class LoginViewController: UIViewController {
         let albums = [FBAlbum]()
         let fbUser = FBUser(firstName: firstName, lastName: lastName, id: id, picture: picture, albums: albums)
         fbUser.saveToFile()
+        user = fbUser
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         _ = ImagesRepo.shared
-        user = FBUser.loadFromFile()
         loginButton.readPermissions = FacebookConstants.loginPermissions
         NotificationCenter.default.addObserver(
             forName: NSNotification.Name.FBSDKProfileDidChange, object: nil, queue: nil) { (Notification) in
@@ -54,16 +54,19 @@ class LoginViewController: UIViewController {
                     self.profilePicture.image = UIImage(named: Constants.imageNoAvatar)
                     self.continueButton.isHidden = true
                     FBUser.deleteFile()
+                    self.user = nil
                 }
         }
         FBSDKProfile.enableUpdates(onAccessTokenChange: true)
 
         if FBSDKAccessToken.current() != nil {
+            user = FBUser.loadFromFile()
             userNameLabel.text = ("\(user!.firstName) \(user!.lastName)")
             profilePicture.image = user!.picture
             continueButton.isHidden = false
         } else {
             continueButton.isHidden = true
+            profilePicture.image = UIImage(named: Constants.imageNoAvatar)
         }
     }
 
