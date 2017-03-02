@@ -65,7 +65,7 @@ struct FacebookAPI {
                         let name = eachPhoto["name"] as? String ?? Constants.stringBlank
                         let createdString = eachPhoto["created_time"] as? String ?? Constants.stringBlank
                         let created = dateFormatter.date(from: createdString)
-                        var fbLocation: FBLocation?
+                        //var fbLocation: FBLocation?
 //                        if let place = eachPhoto["place"] as? [String: Any] {
 //                            let placeId = place["id"] as? String ?? Constants.stringBlank
 //                            let placeName = place["name"] as? String ?? Constants.stringBlank
@@ -75,7 +75,7 @@ struct FacebookAPI {
 //                                }
 //                            }
 //                        }
-                        let photo = FBPhoto(id: id, name: name, created: created, location: fbLocation)
+                        let photo = FBPhoto(id: id, name: name, created: created, location: nil)
                         photos.append(photo)
                     }
                 }

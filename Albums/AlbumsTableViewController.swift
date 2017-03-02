@@ -10,8 +10,10 @@ import UIKit
 import FBSDKLoginKit
 
 class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    @IBOutlet weak var footer: UIView!
+    
     var user: FBUser!
+    private var isLoading = false
     private var nextPage: String? {
         didSet {
             tableView.reloadData()
@@ -25,7 +27,7 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
         //self.dismiss(animated: true, completion: nil)
     }
 
-    private func fetchAlbums(page: String?) {
+    private func fetchAlbums() {
         FacebookAPI.shared.fetchAlbums(pageCursor: nextPage) { (fetchedAlbums, nextPage) in
             if self.nextPage == nil {
                 self.user.albums = fetchedAlbums
@@ -33,6 +35,7 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
                 self.user.albums.append(contentsOf: fetchedAlbums)
             }
             self.user.saveToFile()
+            self.footer.isHidden = true
             self.nextPage = nextPage
         }
     }
@@ -41,7 +44,7 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        fetchAlbums(page: nextPage)
+        fetchAlbums()
         // Do any additional setup after loading the view.
     }
 
@@ -84,7 +87,15 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
         performSegue(withIdentifier: Constants.segueShowPhotos, sender: indexPath.row)
     }
 
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let endOfTable = (scrollView.contentOffset.y >= (CGFloat(user.albums.count * 80) - scrollView.frame.size.height))
 
+        if (nextPage != nil && endOfTable && !isLoading && !scrollView.isDragging && !scrollView.isDecelerating)
+        {
+            footer.isHidden = false
+            fetchAlbums()
+        }
+    }
 
     // MARK: - Navigation
 
