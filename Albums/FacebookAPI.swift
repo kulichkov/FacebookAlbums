@@ -11,6 +11,7 @@ import FBSDKCoreKit
 
 struct FacebookAPI {
     static let shared = FacebookAPI()
+    private let urlSession = URLSession(configuration: .default)
 
     func fetchAlbums(pageCursor: String?, complete: @escaping (_ albums: [FBAlbum], _ nextPage: String?) -> ()) {
         var parameters = ["fields": "name,id,cover_photo"]
@@ -101,8 +102,7 @@ struct FacebookAPI {
                             if imageHeight <= maxHeight || imageWidth <= maxWidth {
                                 if let imageURL = eachImage["source"] as? String {
                                     let pictureURL = URL(string: imageURL)!
-                                    let urlSession = URLSession(configuration: .default)
-                                    urlSession.dataTask(with: pictureURL, completionHandler: { (imageData, _, _) in
+                                    self.urlSession.dataTask(with: pictureURL, completionHandler: { (imageData, _, _) in
                                         if imageData != nil {
                                             let image = UIImage(data: imageData!)
                                             DispatchQueue.main.sync {
