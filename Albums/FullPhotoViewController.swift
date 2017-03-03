@@ -28,6 +28,10 @@ class FullPhotoViewController: UIViewController {
         }
     }
 
+    @IBAction func share(_ sender: UIBarButtonItem) {
+        
+    }
+
     override func viewDidLoad() {
         scrollView.delegate = self
         self.automaticallyAdjustsScrollViewInsets = false;

@@ -370,6 +370,13 @@
                             <constraint firstItem="IWb-s6-xc2" firstAttribute="leading" secondItem="1eB-Ol-YpW" secondAttribute="leading" id="xY7-fe-rF5"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="6TE-yh-sjl">
+                        <barButtonItem key="rightBarButtonItem" systemItem="action" id="RLl-w4-y5A">
+                            <connections>
+                                <action selector="share:" destination="53J-9J-72Y" id="Juz-xr-S9L"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="gZd-UD-OXC" id="haW-SQ-RfL"/>
                         <outlet property="imageViewBottomConstraint" destination="4TN-RW-9Gf" id="A1j-u7-ON4"/>

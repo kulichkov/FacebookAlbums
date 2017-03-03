@@ -13,6 +13,10 @@ struct FacebookAPI {
     static let shared = FacebookAPI()
     private let urlSession = URLSession(configuration: .default)
 
+    func share() {
+        
+    }
+
     func fetchAlbums(pageCursor: String?, complete: @escaping (_ albums: [FBAlbum], _ nextPage: String?) -> ()) {
         var parameters = ["fields": "name,id,cover_photo"]
         if pageCursor != nil {

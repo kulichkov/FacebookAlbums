@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		69C33ABB1E684ED300C4C997 /* FullPhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C33ABA1E684ED300C4C997 /* FullPhotoViewController.swift */; };
 		69CF24111E6A05BF007F6BD3 /* PlaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69CF24101E6A05BF007F6BD3 /* PlaceViewController.swift */; };
+		69CF24131E6A10D6007F6BD3 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69CF24121E6A10D6007F6BD3 /* FBSDKShareKit.framework */; };
 		69EA8ED81E670D4F006560FC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EA8ED71E670D4F006560FC /* AppDelegate.swift */; };
 		69EA8EDD1E670D4F006560FC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69EA8EDB1E670D4F006560FC /* Main.storyboard */; };
 		69EA8EDF1E670D4F006560FC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69EA8EDE1E670D4F006560FC /* Assets.xcassets */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		69C33ABA1E684ED300C4C997 /* FullPhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullPhotoViewController.swift; sourceTree = "<group>"; };
 		69CF24101E6A05BF007F6BD3 /* PlaceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceViewController.swift; sourceTree = "<group>"; };
+		69CF24121E6A10D6007F6BD3 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		69EA8ED41E670D4F006560FC /* Albums.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Albums.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		69EA8ED71E670D4F006560FC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		69EA8EDC1E670D4F006560FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69CF24131E6A10D6007F6BD3 /* FBSDKShareKit.framework in Frameworks */,
 				69EA8EF51E670F5F006560FC /* Bolts.framework in Frameworks */,
 				69EA8EF61E670F5F006560FC /* FBSDKCoreKit.framework in Frameworks */,
 				69EA8EF71E670F5F006560FC /* FBSDKLoginKit.framework in Frameworks */,
@@ -103,6 +106,7 @@
 		69EA8EF11E670F09006560FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				69CF24121E6A10D6007F6BD3 /* FBSDKShareKit.framework */,
 				69EA8EF21E670F5F006560FC /* Bolts.framework */,
 				69EA8EF31E670F5F006560FC /* FBSDKCoreKit.framework */,
 				69EA8EF41E670F5F006560FC /* FBSDKLoginKit.framework */,
