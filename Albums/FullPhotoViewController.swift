@@ -99,4 +99,21 @@ extension FullPhotoViewController: UIScrollViewDelegate {
         super.viewDidLayoutSubviews()
         updateMinZoomScaleForSize(size: view.bounds.size)
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let identifier = segue.identifier {
+            switch identifier {
+            case Constants.segueShowPlace:
+                if let destination = segue.destination as? PlaceViewController
+                {
+                    let latitude = photo.location?.latitude
+                    let longitude = photo.location?.longitude
+                    let mapURL = "https://www.google.com/maps?q=loc:\(latitude!),\(longitude!)"
+                    destination.placeURL = URL(string: mapURL)
+                }
+            default:
+                break
+            }
+        }
+    }
 }

@@ -19,6 +19,7 @@ enum Constants {
     static let segueShowFullPhoto = "Show Full Photo"
     static let segueShowAlbums = "Show Albums"
     static let segueShowPhotos = "Show Photos"
+    static let segueShowPlace = "Show Place"
     static let imageNoAvatar = "noavatar"
     static let imageNoPhoto = "nophoto"
     static let cellForPhotoId = "Photo Cell"

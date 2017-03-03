@@ -342,6 +342,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NqY-sA-78u">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
                                         <state key="normal" title="Location"/>
+                                        <connections>
+                                            <segue destination="qyF-6Z-MBR" kind="show" identifier="Show Place" id="OPi-ok-aAQ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -382,6 +385,39 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WQ9-ee-Sjm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="5298.75" y="104.5774647887324"/>
+        </scene>
+        <!--Place View Controller-->
+        <scene sceneID="1gQ-Gp-Mtr">
+            <objects>
+                <viewController id="qyF-6Z-MBR" customClass="PlaceViewController" customModule="Albums" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Yi2-ZL-Gqo"/>
+                        <viewControllerLayoutGuide type="bottom" id="1X7-zm-ReF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5PK-hS-sS9">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="feU-ig-eHt">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="feU-ig-eHt" firstAttribute="leading" secondItem="5PK-hS-sS9" secondAttribute="leading" id="3n1-a3-Qch"/>
+                            <constraint firstItem="1X7-zm-ReF" firstAttribute="top" secondItem="feU-ig-eHt" secondAttribute="bottom" id="5Qq-hQ-Ksu"/>
+                            <constraint firstItem="feU-ig-eHt" firstAttribute="top" secondItem="5PK-hS-sS9" secondAttribute="top" id="MHH-3M-YRY"/>
+                            <constraint firstAttribute="trailing" secondItem="feU-ig-eHt" secondAttribute="trailing" id="P5K-rT-HYQ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="feU-ig-eHt" id="w9E-Nb-JxN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rPE-wd-g7R" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6653" y="105"/>
         </scene>
     </scenes>
 </document>
