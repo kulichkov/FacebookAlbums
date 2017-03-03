@@ -8,38 +8,49 @@
 
 import UIKit
 
-class FullPhotoViewController: UIViewController, UIScrollViewDelegate {
+class FullPhotoViewController: UIViewController {
+    @IBOutlet weak var locationView: UIView!
     @IBOutlet weak var locationButton: UIButton!
-    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var indicator: UIActivityIndicatorView!
-    @IBOutlet weak var scrollView: UIScrollView! {
-        didSet {
-            scrollView.contentSize = imageView.frame.size
-            scrollView.delegate = self
-            scrollView.minimumZoomScale = 0.3
-            scrollView.maximumZoomScale = 1.0
-        }
-    }
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var imageViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageViewLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageViewTrailingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var imageView: UIImageView!
     var photo: FBPhoto!
-    private var image: UIImage? {
-        get {
-            return imageView.image
-        }
-        set {
-            imageView.image = newValue
+    private var image: UIImage! {
+        didSet {
+            imageView.image = image
             imageView.sizeToFit()
-            scrollView?.contentSize = imageView.frame.size
+            updateMinZoomScaleForSize(size: view.bounds.size)
+            updateConstraintsForSize(size: view.bounds.size)
         }
     }
 
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        return imageView
+    override func viewDidLoad() {
+        scrollView.delegate = self
+        self.automaticallyAdjustsScrollViewInsets = false;
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setLocationButton()
+        setImage()
+    }
+
+    func setLocationButton() {
+        if let location = photo.location {
+            locationButton.setTitle(location.name, for: .normal)
+        } else {
+            locationButton.isHidden = true
+            locationView.isHidden = true
+        }
+    }
+
+    func setImage() {
         if let savedImage = ImagesRepo.shared.image(id: photo.id) {
-            image = savedImage
+            imageView.image = savedImage
         } else {
             indicator.startAnimating()
             DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
@@ -53,13 +64,39 @@ class FullPhotoViewController: UIViewController, UIScrollViewDelegate {
             }
         }
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        if let location = photo.location {
-            locationButton.setTitle(location.name, for: .normal)
-        } else {
-            locationButton.isHidden = true
-        }
+}
+
+extension FullPhotoViewController: UIScrollViewDelegate {
+
+    func updateMinZoomScaleForSize(size: CGSize) {
+        let widthScale = size.width / imageView.bounds.width
+        let heightScale = size.height / imageView.bounds.height
+        let minScale = min(widthScale, heightScale)
+        scrollView.minimumZoomScale = minScale
+        scrollView.maximumZoomScale = 1.0
+        scrollView.zoomScale = minScale
     }
 
+    func updateConstraintsForSize(size: CGSize) {
+        let yOffset = max(0, (size.height - imageView.frame.height) / 2)
+        imageViewTopConstraint.constant = yOffset
+        imageViewBottomConstraint.constant = yOffset
+        let xOffset = max(0, (size.width - imageView.frame.width) / 2)
+        imageViewLeadingConstraint.constant = xOffset
+        imageViewTrailingConstraint.constant = xOffset
+        view.layoutIfNeeded()
+    }
+
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        updateConstraintsForSize(size: view.bounds.size)
+    }
+
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return imageView
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        updateMinZoomScaleForSize(size: view.bounds.size)
+    }
 }
