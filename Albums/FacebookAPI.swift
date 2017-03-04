@@ -8,13 +8,17 @@
 
 import UIKit
 import FBSDKCoreKit
+import FBSDKShareKit
 
 struct FacebookAPI {
     static let shared = FacebookAPI()
     private let urlSession = URLSession(configuration: .default)
 
-    func share() {
-        
+    func share(sender: UIViewController!) {
+        let fbPhoto = (sender as! FullPhotoViewController).photo!
+        let shareContent = FBSDKShareLinkContent()
+        shareContent.contentURL = URL(string: fbPhoto.link)
+        FBSDKShareDialog.show(from: sender, with: shareContent, delegate: nil)
     }
 
     func fetchAlbums(pageCursor: String?, complete: @escaping (_ albums: [FBAlbum], _ nextPage: String?) -> ()) {
@@ -56,7 +60,7 @@ struct FacebookAPI {
         dateFormatter.dateStyle = .short
         dateFormatter.dateFormat = FacebookConstants.dateFormat
 
-        var parameters = ["fields": "name,created_time,place"]
+        var parameters = ["fields": "name,created_time,place,link"]
         if pageCursor != nil {
             parameters.updateValue(pageCursor!, forKey: "after")
         }
@@ -68,6 +72,7 @@ struct FacebookAPI {
                     for eachPhoto in data {
                         let id = eachPhoto["id"] as? String ?? Constants.stringBlank
                         let name = eachPhoto["name"] as? String ?? Constants.stringBlank
+                        let link = eachPhoto["link"] as? String ?? Constants.stringBlank
                         let createdString = eachPhoto["created_time"] as? String ?? Constants.stringBlank
                         let created = dateFormatter.date(from: createdString)
                         var fbLocation: FBLocation?
@@ -80,7 +85,7 @@ struct FacebookAPI {
                                 }
                             }
                         }
-                        let photo = FBPhoto(id: id, name: name, created: created, location: fbLocation)
+                        let photo = FBPhoto(id: id, name: name, link: link, created: created, location: fbLocation)
                         photos.append(photo)
                     }
                 }

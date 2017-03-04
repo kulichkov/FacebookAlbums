@@ -18,12 +18,14 @@ struct FBLocation {
 class FBPhoto: NSObject, NSCoding {
     let id: String
     let name: String
+    let link: String
     let created: Date?
     let location: FBLocation?
 
-    init(id: String, name: String, created: Date?, location: FBLocation?) {
+    init(id: String, name: String, link: String, created: Date?, location: FBLocation?) {
         self.id = id
         self.name = name
+        self.link = link
         self.created = created
         self.location = location
     }
@@ -31,6 +33,7 @@ class FBPhoto: NSObject, NSCoding {
     required init?(coder aDecoder: NSCoder) {
         self.id = aDecoder.decodeObject(forKey: "id") as! String
         self.name = aDecoder.decodeObject(forKey: "name") as! String
+        self.link = aDecoder.decodeObject(forKey: "link") as! String
         self.created = aDecoder.decodeObject(forKey: "created") as? Date
         if let locationId = aDecoder.decodeObject(forKey: "location.id") as? String, locationId != Constants.stringBlank {
             let locationName = aDecoder.decodeObject(forKey: "location.name") as! String
@@ -45,6 +48,7 @@ class FBPhoto: NSObject, NSCoding {
     func encode(with aCoder: NSCoder) {
         aCoder.encode(id, forKey: "id")
         aCoder.encode(name, forKey: "name")
+        aCoder.encode(link, forKey: "link")
         aCoder.encode(created, forKey: "created")
         aCoder.encode(location?.name, forKey: "location.name")
         aCoder.encode(location?.id, forKey: "location.id")

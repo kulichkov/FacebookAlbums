@@ -29,7 +29,7 @@ class FullPhotoViewController: UIViewController {
     }
 
     @IBAction func share(_ sender: UIBarButtonItem) {
-        
+        FacebookAPI.shared.share(sender: self)
     }
 
     override func viewDidLoad() {
