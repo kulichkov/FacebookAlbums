@@ -13,7 +13,6 @@ class PhotosTableViewController: UIViewController, UITableViewDelegate, UITableV
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var footer: UIView!
-
     var user: FBUser!
     var albumIndex: Int!
     private var isLoading = false
@@ -80,25 +79,27 @@ class PhotosTableViewController: UIViewController, UITableViewDelegate, UITableV
         dateFormatter.dateStyle = .short
         dateFormatter.timeStyle = .none
         if let photoCell = tableView.dequeueReusableCell(withIdentifier: Constants.cellForPhotoId, for: indexPath) as? PhotoTableViewCell {
-            photoCell.titleLabel.text = user.albums[self.albumIndex].photos[indexPath.row].name
-            if let createdTime = user.albums[self.albumIndex].photos[indexPath.row].created {
+            photoCell.titleLabel.text = user.albums[albumIndex].photos[indexPath.row].name
+            if let createdTime = user.albums[albumIndex].photos[indexPath.row].created {
                 photoCell.createdLabel.text = "Created: " + dateFormatter.string(from: createdTime)
             }
-            let imageId = user.albums[self.albumIndex].photos[indexPath.row].id
+            let imageId = user.albums[albumIndex].photos[indexPath.row].id
             if let image = ImagesRepo.shared.thumb(id: imageId) {
                 photoCell.activityIndicator.stopAnimating()
                 photoCell.photo.image = image
             } else {
                 photoCell.photo.image = UIImage(named: Constants.imageNoPhoto)
                 photoCell.activityIndicator.startAnimating()
-                DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
-                    FacebookAPI.shared.getImage(imageID: imageId, full:false) { image in
-                        ImagesRepo.shared.updateThumb(image: image, id: imageId)
+                let thumbURL = URL(string: user.albums[albumIndex].photos[indexPath.row].thumb)!
+                URLSession.shared.dataTask(with: thumbURL, completionHandler: { (data, _, _) in
+                    if let imageData = data {
+                        let image = UIImage(data: imageData)!
                         DispatchQueue.main.async {
+                            ImagesRepo.shared.updateThumb(image: image, id: imageId)
                             self.tableView.reloadData()
                         }
                     }
-                }
+                }).resume()
             }
             return photoCell
         }

@@ -60,7 +60,7 @@ struct FacebookAPI {
         dateFormatter.dateStyle = .short
         dateFormatter.dateFormat = FacebookConstants.dateFormat
 
-        var parameters = ["fields": "name,created_time,place,link"]
+        var parameters = ["fields": "name,created_time,place,link,images"]
         if pageCursor != nil {
             parameters.updateValue(pageCursor!, forKey: "after")
         }
@@ -70,6 +70,19 @@ struct FacebookAPI {
                 var nextPage: String?
                 if let data = parsedResult["data"] as? [[String: Any]] {
                     for eachPhoto in data {
+                        var urlFull = ""
+                        var urlThumb = ""
+                        if let images = eachPhoto["images"] as? [[String: Any]] {
+                            var imagesArray = [[Int: String]]()
+                            for eachImage in images {
+                                let imageHeight = eachImage["height"] as! Int
+                                let imageSource = eachImage["source"] as! String
+                                imagesArray.append([imageHeight: imageSource])
+                            }
+                            imagesArray.sort { $0.keys.first! > $1.keys.first! }
+                            urlFull = (imagesArray.first?.values.first)!
+                            urlThumb = (imagesArray.last?.values.first)!
+                        }
                         let id = eachPhoto["id"] as? String ?? Constants.stringBlank
                         let name = eachPhoto["name"] as? String ?? Constants.stringBlank
                         let link = eachPhoto["link"] as? String ?? Constants.stringBlank
@@ -85,7 +98,7 @@ struct FacebookAPI {
                                 }
                             }
                         }
-                        let photo = FBPhoto(id: id, name: name, link: link, created: created, location: fbLocation)
+                        let photo = FBPhoto(id: id, name: name, link: link, thumb: urlThumb, full: urlFull, created: created, location: fbLocation)
                         photos.append(photo)
                     }
                 }
