@@ -11,12 +11,14 @@ import Foundation
 class FBAlbum: NSObject, NSCoding {
     let id: String
     let name: String
+    let coverURL: String
     let coverId: String
     var photos: [FBPhoto]
 
-    init(id: String, name: String, coverId: String, photos: [FBPhoto]) {
+    init(id: String, name: String, coverURL: String, coverId: String, photos: [FBPhoto]) {
         self.id = id
         self.name = name
+        self.coverURL = coverURL
         self.coverId = coverId
         self.photos = photos
     }
@@ -24,6 +26,7 @@ class FBAlbum: NSObject, NSCoding {
     required init?(coder aDecoder: NSCoder) {
         self.id = aDecoder.decodeObject(forKey: "id") as! String
         self.name = aDecoder.decodeObject(forKey: "name") as! String
+        self.coverURL = aDecoder.decodeObject(forKey: "coverURL") as! String
         self.coverId = aDecoder.decodeObject(forKey: "coverId") as! String
         self.photos = aDecoder.decodeObject(forKey: "photos") as! [FBPhoto]
     }
@@ -31,6 +34,7 @@ class FBAlbum: NSObject, NSCoding {
     func encode(with aCoder: NSCoder) {
         aCoder.encode(id, forKey: "id")
         aCoder.encode(name, forKey: "name")
+        aCoder.encode(coverURL, forKey: "coverURL")
         aCoder.encode(coverId, forKey: "coverId")
         aCoder.encode(photos, forKey: "photos")
     }

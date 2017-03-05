@@ -22,7 +22,7 @@ struct FacebookAPI {
     }
 
     func fetchAlbums(pageCursor: String?, complete: @escaping (_ albums: [FBAlbum], _ nextPage: String?) -> ()) {
-        var parameters = ["fields": "name,id,cover_photo"]
+        var parameters = ["fields": "name,id,cover_photo,picture"]
         if pageCursor != nil {
             parameters.updateValue(pageCursor!, forKey: "after")
         }
@@ -34,11 +34,19 @@ struct FacebookAPI {
                     for eachAlbum in data {
                         let id = eachAlbum["id"] as? String ?? Constants.stringBlank
                         let name = eachAlbum["name"] as? String ?? Constants.stringBlank
-                        var coverId = Constants.stringBlank
-                        if let cover_photo = eachAlbum["cover_photo"] as? [String: String] {
-                            coverId = cover_photo["id"] ?? Constants.stringBlank
+                        var coverId = ""
+                        if let coverPhoto = eachAlbum["cover_photo"] as? [String: String] {
+                            coverId = coverPhoto["id"] ?? Constants.stringBlank
                         }
-                        let album = FBAlbum(id: id, name: name, coverId: coverId, photos: [FBPhoto]())
+                        var coverURL = Constants.stringBlank
+                        if let picture = eachAlbum["picture"] as? [String: Any] {
+                            if let picData = picture["data"] as? [String: Any] {
+                                if let url = picData["url"] as? String {
+                                    coverURL = url
+                                }
+                            }
+                        }
+                        let album = FBAlbum(id: id, name: name, coverURL: coverURL, coverId: coverId, photos: [FBPhoto]())
                         albums.append(album)
                     }
                 }
