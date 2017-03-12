@@ -29,9 +29,14 @@ class PhotosTableViewController: UIViewController, UITableViewDelegate, UITableV
                 self.user.albums[self.albumIndex].photos.append(contentsOf: fetchedPhotos)
             }
             self.user.saveToFile()
-            self.footer.isHidden = true
             self.nextPage = nextPage
+            if nextPage == nil {
+                self.footer.frame.size.height = 0.0
+                self.footer.isHidden = true
+                self.tableView.reloadData()
+            }
         }
+        tableView.reloadData()
     }
 
     override func viewDidLoad() {
@@ -51,6 +56,7 @@ class PhotosTableViewController: UIViewController, UITableViewDelegate, UITableV
 
         if (nextPage != nil && endOfTable && !isLoading && !scrollView.isDragging && !scrollView.isDecelerating)
         {
+            footer.frame.size.height = 40.0
             footer.isHidden = false
             fetchPhotos()
         }

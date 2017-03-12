@@ -27,6 +27,8 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
     }
 
     private func fetchAlbums() {
+        footer.frame.size.height = 40.0
+        footer.isHidden = false
         FacebookAPI.shared.fetchAlbums(pageCursor: nextPage) { (fetchedAlbums, nextPage) in
             if self.nextPage == nil {
                 self.user.albums = fetchedAlbums
@@ -34,9 +36,16 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
                 self.user.albums.append(contentsOf: fetchedAlbums)
             }
             self.user.saveToFile()
+            self.footer.frame.size.height = 0.0
             self.footer.isHidden = true
             self.nextPage = nextPage
+            if nextPage == nil {
+                self.footer.frame.size.height = 0.0
+                self.footer.isHidden = true
+                self.tableView.reloadData()
+            }
         }
+        tableView.reloadData()
     }
 
     override func viewDidLoad() {
@@ -96,6 +105,7 @@ class AlbumsTableViewController: UIViewController, UITableViewDelegate, UITableV
 
         if (nextPage != nil && endOfTable && !isLoading && !scrollView.isDragging && !scrollView.isDecelerating)
         {
+            footer.frame.size.height = 40.0
             footer.isHidden = false
             fetchAlbums()
         }
